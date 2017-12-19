@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Savvy.Models;
+using Savvy.ViewModels.Service;
 
 namespace Savvy.Controllers
 {   [Authorize]
@@ -42,6 +43,8 @@ namespace Savvy.Controllers
         // GET: Service/Create
         public ActionResult Create()
         {
+            var listStylist = FindStylist();
+            ViewBag.StylistID = listStylist;
             return View();
         }
 
@@ -49,8 +52,8 @@ namespace Savvy.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken] //[Bind(Include = "ServiceId,Name,Description,Minutes,Price")] 
-        public ActionResult Create(Service newService)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreateService newService)
         {
             var service = new Service
             {
@@ -58,12 +61,12 @@ namespace Savvy.Controllers
                 Description = newService.Description,
                 Minutes = newService.Minutes,
                 Price = newService.Price,
-                Stylist = db.Stylists.Find(newService.Stylist)
+                Stylist = db.Stylists.Find(newService.StylistID)
             };
 
             if (ModelState.IsValid)
             {
-                db.Services.Add(newService);
+                db.Services.Add(service);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -137,18 +140,16 @@ namespace Savvy.Controllers
             base.Dispose(disposing);
         }
 
-        private void FindStylist(int id)
+        private SelectList FindStylist(object selectedStylist = null)
         {
-            var allStylist = db.Stylists.ToList();
+            var stylistQuery = from s in db.Stylists
+                               select new
+                               {
+                                   StylistID = s.StylistID,
+                                   FName = s.User.FName
+                               };
 
-            foreach (var item in allStylist)
-            {
-                if (item.StylistID == id)
-                {
-                    ViewBag.Stylist = item;
-                }
-
-            }
+            return new SelectList(stylistQuery, "StylistID", "FName", selectedStylist);
         }
     }
 }
