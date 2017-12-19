@@ -64,6 +64,12 @@ namespace Savvy.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "First Name")]
+        public string FName { get; set; } 
+        
+        [Display(Name ="Last Name")]
+        public string LName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

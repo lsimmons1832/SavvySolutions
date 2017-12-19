@@ -16,6 +16,9 @@ namespace Savvy.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FName { get; set; }
+        public string LName { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,5 +32,10 @@ namespace Savvy.Models
         {
             return new ApplicationDbContext();
         }
+        public System.Data.Entity.DbSet<Savvy.Models.Appointment> Appointments {get; set;}
+        public System.Data.Entity.DbSet<Savvy.Models.Customer> Customers {get; set;}
+        public System.Data.Entity.DbSet<Savvy.Models.Schedule> Schedules {get; set;}
+        public System.Data.Entity.DbSet<Savvy.Models.Service> Services {get; set;}
+        public System.Data.Entity.DbSet<Savvy.Models.Stylist> Stylists {get; set;}
     }
 }
