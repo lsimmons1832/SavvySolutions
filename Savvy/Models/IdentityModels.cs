@@ -19,6 +19,7 @@ namespace Savvy.Models
 
         public string FName { get; set; }
         public string LName { get; set; }
+        public string UserRoles { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

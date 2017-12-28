@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201712120240036_AddDataStruct.Designer.cs">
       <DependentUpon>201712120240036_AddDataStruct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712282047483_EditIdentityMod.cs" />
+    <Compile Include="Migrations\201712282047483_EditIdentityMod.Designer.cs">
+      <DependentUpon>201712282047483_EditIdentityMod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -336,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712120240036_AddDataStruct.resx">
       <DependentUpon>201712120240036_AddDataStruct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712282047483_EditIdentityMod.resx">
+      <DependentUpon>201712282047483_EditIdentityMod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
