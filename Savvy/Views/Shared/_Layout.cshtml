@@ -21,10 +21,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (ViewContext.HttpContext.User.IsInRole("Stylist"))
+                    {
+                        <li>@Html.ActionLink("MyAppointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("MySchedule", "Index", "Schedule")</li>
+                        <li>@Html.ActionLink("MyServices", "Index", "Service")</li>
+                    }
+                    @if (ViewContext.HttpContext.User.IsInRole("Customer"))
+                    {
                     <li>@Html.ActionLink("Appointments", "Index", "Appointment")</li>
-                    <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
-					<li>@Html.ActionLink("Services", "Index", "Service")</li>
-                    <li>@Html.ActionLink("Stylist", "Index", "Stylist")</li>
+                    <li>@Html.ActionLink("MyProfile", "Details", "Customer")</li>
+                    @*<li>@Html.ActionLink("Services", "Index", "Service")</li>
+                    <li>@Html.ActionLink("Stylist", "Index", "Stylist")</li>*@
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

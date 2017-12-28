@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Savvy.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,7 +19,6 @@ namespace Savvy.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-
             return View(db.Customers.ToList());
         }
 
@@ -50,7 +50,7 @@ namespace Savvy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CustomerID,Address1,Address2,City,State,Zip")] Customer customer)
         {
-            var currentUser = User.Identity.GetUserId().ToString();
+            var currentUser = User.Identity.GetUserId();
             customer.User = db.Users.Find(currentUser);
 
             if (ModelState.IsValid)
