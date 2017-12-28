@@ -1,4 +1,5 @@
-﻿@model Savvy.Models.Appointment
+﻿@*@model Savvy.Models.Appointment*@
+@model Savvy.ViewModels.Appointment.BookAppointment
 
 @{
     ViewBag.Title = "Create";
@@ -15,6 +16,35 @@
         <h4>Appointment</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Stylists">Stylist</label>
+			<div class="col-md-10">
+				@*@Html.DropDownList("Stylists", String.Empty)*@
+				Stylists.Select(m => new SelectListItem { Text = m, Value = m })
+				@Html.DropDownList("Stylists", ((List<string>)ViewBag.Stylists).Select(m => new SelectListItem { Text = m, Value = m }))
+				@Html.ValidationMessageFor(model => model.Stylist)
+			</div>
+		</div>
+		@*@if(ViewBag.Stylists != null)
+		{
+		<table class="table">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(ViewBag.ServiceQuery)
+				</th>
+			</tr>
+
+			@foreach (var item in ServiceQuery)
+			{
+				<tr>
+					<td>
+						@Html.DropDownList("Services", String.Empty)
+					</td>
+				</tr>
+			}
+		</table>
+		}*@
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

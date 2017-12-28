@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Savvy.Models;
+using Savvy.ViewModels.Appointment;
 
 namespace Savvy.Controllers
 {
@@ -18,6 +19,10 @@ namespace Savvy.Controllers
         // GET: Appointment
         public ActionResult Index()
         {
+            var stylist = db.Stylists.Include(s => s.StylistID);
+            var service = db.Services.Include(t => t.Name);
+            var customer = db.Customers.Include(c => c.CustomerID);
+
             return View(db.Appointments.ToList());
         }
 
@@ -39,7 +44,28 @@ namespace Savvy.Controllers
         // GET: Appointment/Create
         public ActionResult Create()
         {
+            var listStylist = FindStylist();
+            ViewBag.Stylists = listStylist;
+
+            //var listService = LocateServiceByStylist();
+            //ViewBag.Services = listService;
+
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult ShowStylistDetails(BookAppointment book)
+        {
+            int SelectedValue = book.MyStylist;
+
+            var serviceQuery = from s in db.Services
+                               where s.Stylist.StylistID == SelectedValue
+                               select new
+                               {
+                                   Name = s.Name
+                               };
+
+            return View(serviceQuery);
         }
 
         // POST: Appointment/Create
@@ -47,8 +73,16 @@ namespace Savvy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AppointmentId")] Appointment appointment)
+        public ActionResult Create(BookAppointment newAppointment)
         {
+            var appointment = new Appointment
+            {
+                Customer = db.Customers.Find(newAppointment.CustomerId),
+                Schedule = db.Schedules.Find(newAppointment.Schedule),
+                Service = db.Services.Find(newAppointment.Services),
+                Stylist = db.Stylists.Find(newAppointment)
+            };
+
             if (ModelState.IsValid)
             {
                 db.Appointments.Add(appointment);
@@ -56,7 +90,7 @@ namespace Savvy.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(appointment);
+            return View(newAppointment);
         }
 
         // GET: Appointment/Edit/5
@@ -124,5 +158,19 @@ namespace Savvy.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private SelectList FindStylist(object selectedStylist = null)
+        {
+            var stylistQuery = from s in db.Stylists
+                               select new
+                               {
+                                   StylistID = s.StylistID,
+                                   FName = s.User.FName
+                               };
+
+            return new SelectList(stylistQuery, "StylistID", "FName", selectedStylist);
+        }
+
+    
     }
 }

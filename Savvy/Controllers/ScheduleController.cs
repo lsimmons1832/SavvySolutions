@@ -18,6 +18,8 @@ namespace Savvy.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
+            var stylist = db.Stylists.Include(s => s.StylistID);
+
             return View(db.Schedules.ToList());
         }
 
@@ -39,6 +41,9 @@ namespace Savvy.Controllers
         // GET: Schedule/Create
         public ActionResult Create()
         {
+            var listStylist = FindStylist();
+            ViewBag.StylistID = listStylist;
+
             return View();
         }
 
@@ -47,8 +52,15 @@ namespace Savvy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ScheduleId,StartDate,EndDate")] Schedule schedule)
+        public ActionResult Create(ViewModels.Schedule.CreateSchedule newSchedule)
         {
+            var schedule = new Schedule
+            {
+                Stylist = db.Stylists.Find(newSchedule.StylistId),
+                StartDate = newSchedule.StartDate,
+                EndDate = newSchedule.EndDate
+            };
+
             if (ModelState.IsValid)
             {
                 db.Schedules.Add(schedule);
@@ -56,7 +68,7 @@ namespace Savvy.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(schedule);
+            return View(newSchedule);
         }
 
         // GET: Schedule/Edit/5
@@ -123,6 +135,18 @@ namespace Savvy.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private SelectList FindStylist(object selectedStylist = null)
+        {
+            var stylistQuery = from s in db.Stylists
+                               select new
+                               {
+                                   StylistID = s.StylistID,
+                                   FName = s.User.FName
+                               };
+
+            return new SelectList(stylistQuery, "StylistID", "FName", selectedStylist);
         }
     }
 }
