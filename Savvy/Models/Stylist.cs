@@ -15,5 +15,8 @@ namespace Savvy.Models
         public string State { get; set; }
         public int Zip { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public virtual Service Services { get; set; }
+        //public virtual Schedule Schedules { get; set; }
+
     }
 }

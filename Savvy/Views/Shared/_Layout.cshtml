@@ -23,14 +23,15 @@
                 <ul class="nav navbar-nav">
                     @if (ViewContext.HttpContext.User.IsInRole("Stylist"))
                     {
-                        <li>@Html.ActionLink("MyAppointments", "Index", "Appointment")</li>
-                        <li>@Html.ActionLink("MySchedule", "Index", "Schedule")</li>
-                        <li>@Html.ActionLink("MyServices", "Index", "Service")</li>
+                        <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("My Schedule", "Index", "Schedule")</li>
+                        <li>@Html.ActionLink("My Services", "Index", "Service")</li>
                     }
                     @if (ViewContext.HttpContext.User.IsInRole("Customer"))
                     {
-                    <li>@Html.ActionLink("Appointments", "Index", "Appointment")</li>
-                    <li>@Html.ActionLink("MyProfile", "Details", "Customer")</li>
+                        <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("Book Appointment", "Create", "Appointment")</li>
+                        <li>@Html.ActionLink("My Profile", "Details", "Customer")</li>
                     @*<li>@Html.ActionLink("Services", "Index", "Service")</li>
                     <li>@Html.ActionLink("Stylist", "Index", "Stylist")</li>*@
                     }

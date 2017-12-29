@@ -216,6 +216,18 @@
     <Compile Include="Migrations\201712282047483_EditIdentityMod.Designer.cs">
       <DependentUpon>201712282047483_EditIdentityMod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712292010564_save DBChanges.cs" />
+    <Compile Include="Migrations\201712292010564_save DBChanges.Designer.cs">
+      <DependentUpon>201712292010564_save DBChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712292017163_add date to appointment.cs" />
+    <Compile Include="Migrations\201712292017163_add date to appointment.Designer.cs">
+      <DependentUpon>201712292017163_add date to appointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712292112548_change model for Stylist.cs" />
+    <Compile Include="Migrations\201712292112548_change model for Stylist.Designer.cs">
+      <DependentUpon>201712292112548_change model for Stylist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -228,6 +240,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Appointment\BookAppointment.cs" />
+    <Compile Include="ViewModels\Appointment\ShowMyAppointments.cs" />
     <Compile Include="ViewModels\Customer\SelectStylistAndService.cs" />
     <Compile Include="ViewModels\Schedule\CreateSchedule.cs" />
     <Compile Include="ViewModels\Service\CreateService.cs" />
@@ -343,6 +356,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712282047483_EditIdentityMod.resx">
       <DependentUpon>201712282047483_EditIdentityMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712292010564_save DBChanges.resx">
+      <DependentUpon>201712292010564_save DBChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712292017163_add date to appointment.resx">
+      <DependentUpon>201712292017163_add date to appointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712292112548_change model for Stylist.resx">
+      <DependentUpon>201712292112548_change model for Stylist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

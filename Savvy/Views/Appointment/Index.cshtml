@@ -1,19 +1,68 @@
-﻿@model IEnumerable<Savvy.Models.Appointment>
+﻿@*@using Savvy.Models
+@model List<Appointment>
 
 @{
-    ViewBag.Title = "Index";
-}
+    ViewBag.Title = "Appointment";
+}*@
+@model IEnumerable<Savvy.Models.Appointment>
 
-<h2>Index</h2>
+@{
+    ViewBag.Title = "Appointment";
+}
+<h2>Appointments</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stylist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Service)
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Date
+        </th>
         <th></th>
     </tr>
 
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stylist.User.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stylist.Services.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.AppointmentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentId })
+            </td>
+        </tr>
+    }
+
+</table>
+    @*<tr>
+        <th></th>
+    </tr>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -24,4 +73,4 @@
     </tr>
 }
 
-</table>
+</table>*@

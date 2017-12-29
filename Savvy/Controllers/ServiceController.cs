@@ -18,7 +18,7 @@ namespace Savvy.Controllers
         // GET: Service
         public ActionResult Index()
         {
-            var service = db.Services.Include(s => s.Stylist);
+            //var service = db.Services.Include(s => s.Stylist);
            
             return View(db.Services.ToList());
         }
@@ -60,8 +60,8 @@ namespace Savvy.Controllers
                 Name = newService.Name,
                 Description = newService.Description,
                 Minutes = newService.Minutes,
-                Price = newService.Price,
-                Stylist = db.Stylists.Find(newService.StylistID)
+                Price = newService.Price//,
+                //Stylist = db.Stylists.Find(newService.StylistID)
             };
 
             if (ModelState.IsValid)
