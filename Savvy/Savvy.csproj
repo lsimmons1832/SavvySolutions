@@ -224,9 +224,9 @@
     <Compile Include="Migrations\201712292017163_add date to appointment.Designer.cs">
       <DependentUpon>201712292017163_add date to appointment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712292112548_change model for Stylist.cs" />
-    <Compile Include="Migrations\201712292112548_change model for Stylist.Designer.cs">
-      <DependentUpon>201712292112548_change model for Stylist.cs</DependentUpon>
+    <Compile Include="Migrations\201712300139551_AddStylist.cs" />
+    <Compile Include="Migrations\201712300139551_AddStylist.Designer.cs">
+      <DependentUpon>201712300139551_AddStylist.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -363,8 +363,8 @@
     <EmbeddedResource Include="Migrations\201712292017163_add date to appointment.resx">
       <DependentUpon>201712292017163_add date to appointment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712292112548_change model for Stylist.resx">
-      <DependentUpon>201712292112548_change model for Stylist.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712300139551_AddStylist.resx">
+      <DependentUpon>201712300139551_AddStylist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

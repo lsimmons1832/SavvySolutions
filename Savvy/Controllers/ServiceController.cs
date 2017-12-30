@@ -18,7 +18,7 @@ namespace Savvy.Controllers
         // GET: Service
         public ActionResult Index()
         {
-            //var service = db.Services.Include(s => s.Stylist);
+            var service = db.Services.Include(s => s.Stylist);
            
             return View(db.Services.ToList());
         }
