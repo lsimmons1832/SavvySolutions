@@ -46,15 +46,24 @@ namespace Savvy.Controllers
 
         public ActionResult Create()
         {
-            PopulateStylistsDropDownList();
-            SelectService();
+
+            var listStylist = PopulateStylistsDropDownList();
+            ViewBag.Stylists = listStylist;
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ApointmentID,StylistName,ServiceName,ServiceDescription, Date")]Appointment appointment)
+        public ActionResult Create(BookAppointment bookAppointment)
         {
+            var appointment = new Appointment
+            {
+                Stylist = db.Stylists.Find(bookAppointment.Stylist),
+                Service = db.Services.Find(bookAppointment.Services),
+                Date = bookAppointment.Date,
+                Customer = db.Customers.Find(bookAppointment.Customer)
+            };
             try
             {
                 if (ModelState.IsValid)
@@ -70,7 +79,7 @@ namespace Savvy.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
             PopulateStylistsDropDownList(appointment.Stylist);
-            return View(appointment);
+            return View(bookAppointment);
         }
 
         public ActionResult Edit(int? id)

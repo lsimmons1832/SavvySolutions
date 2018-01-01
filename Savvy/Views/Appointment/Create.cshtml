@@ -1,5 +1,4 @@
-﻿@*@model Savvy.Models.Appointment*@
-@model Savvy.Models.Appointment
+﻿@model Savvy.Models.Appointment
 
 @{
     ViewBag.Title = "Create";
@@ -23,14 +22,22 @@
                 @Html.ValidationMessageFor(model => model.AppointmentId, "", new { @class = "text-danger" })
             </div>
         </div>*@
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Stylists">Stylist</label>
+			<div class="col-md-10">
+				@Html.DropDownList("Stylists", String.Empty)
+				@Html.ValidationMessageFor(model => model.Stylist)
+			</div>
+		</div>
         
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Stylist">Stylists</label>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Stylist, htmlAttributes: new { @class = "control-label col-md-"})
             <div class="col-md-10">
-                @Html.DropDownList("Stylist", new List<SelectListItem>() { new SelectListItem() { Text = "", Value = "" } })@*null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownList("Stylist", string.Empty)
                 @Html.ValidationMessageFor(model => model.Stylist, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
         
         <div class="form-group">
             @*@Html.LabelFor(model => model.Service, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -39,30 +46,36 @@
                 @Html.ValidationMessageFor(model => model.Service, "", new { @class = "text-danger" })
             </div>*@
         </div>
-        @*<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <table>
-                    <tr>
-                    @{
-                        int cnt = 0;
-                        List<Savvy.ViewModels.Appointment.BookAppointment> stylists = ViewBag.Appointment;
+		@*<div>
+			<div>
+ <table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Service)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th></th>
+    </tr>
 
-                        foreach (var stylist in stylists)
-                        {
-                            if (cnt++ % 3 == 0)
-                            {
-                                @:</tr><tr>
-                            }
-                            <td>
-                            <input type="checkbox"
-                                   name="selectedStylist"
-                                   value="@stylist.Services"
-                                   @Html.Raw(stylist.Services)
-                            </td>
-                        }
-                        @:</tr>
-                    }
-                </table>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ScheduleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ScheduleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ScheduleId })
+        </td>
+    </tr>
+}
+
+</table>
             </div>
         </div>*@
 
