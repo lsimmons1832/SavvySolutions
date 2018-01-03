@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Savvy.Models
+﻿namespace Savvy.Models
 {
     public class Service
     {

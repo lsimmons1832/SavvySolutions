@@ -46,40 +46,45 @@ namespace Savvy.Controllers
 
         public ActionResult Create()
         {
+            var create = new CreateApp
+            {
+                listStylist = PopulateStylistsDropDownList(),
+                Services = SelectService(),
+            };
 
-            var listStylist = PopulateStylistsDropDownList();
-            ViewBag.Stylists = listStylist;
-
-            return View();
+            return View(create);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(BookAppointment bookAppointment)
         {
-            var appointment = new Appointment
+            if (bookAppointment.SelectedService)
             {
-                Stylist = db.Stylists.Find(bookAppointment.Stylist),
-                Service = db.Services.Find(bookAppointment.Services),
-                Date = bookAppointment.Date,
-                Customer = db.Customers.Find(bookAppointment.Customer)
-            };
-            try
-            {
-                if (ModelState.IsValid)
+                var appointment = new Appointment
                 {
-                    db.Appointments.Add(appointment);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    Stylist = db.Stylists.Find(bookAppointment.Stylist),
+                    Service = db.Services.Find(bookAppointment.Services),
+                    Date = bookAppointment.Date,
+                    Customer = db.Customers.Find(bookAppointment.Customer)
+                };
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Appointments.Add(appointment);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+                PopulateStylistsDropDownList(appointment.Stylist);
             }
-            catch (RetryLimitExceededException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.)
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-            }
-            PopulateStylistsDropDownList(appointment.Stylist);
-            return View(bookAppointment);
+                return Create();
         }
 
         public ActionResult Edit(int? id)
@@ -195,16 +200,14 @@ namespace Savvy.Controllers
 
             return new SelectList(customerQuery, "CustomerId", "User_Id", selectedCustomer);
         }
-        private SelectList SelectService(object selectedService = null)
+
+        private List<Service> SelectService(object selectedService = null)
         {
             var serviceQuery = from s in db.Services
-                select new
-                {
-                    ServiceID = s.ServiceId,
-                    Name = s.Name
-                };
+                               select s;
 
-            return new SelectList(serviceQuery, "ServiceID", "Name", selectedService);
+
+            return serviceQuery.ToList();
         }
 
     }

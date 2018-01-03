@@ -1,4 +1,4 @@
-﻿@model Savvy.Models.Appointment
+﻿@model Savvy.ViewModels.Appointment.CreateApp
 
 @{
     ViewBag.Title = "Create";
@@ -15,76 +15,78 @@
         <h4>Appointment</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.AppointmentId, htmlAttributes: new { @class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AppointmentId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AppointmentId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
 		<div class="form-group">
-			<label class="control-label col-md-2" for="Stylists">Stylist</label>
+			<label class="control-label col-md-2" for="Stylists">Stylist: </label>
 			<div class="col-md-10">
-				@Html.DropDownList("Stylists", String.Empty)
-				@Html.ValidationMessageFor(model => model.Stylist)
+				@Html.DropDownList("listStylist", String.Empty)
+				@Html.ValidationMessageFor(model => model.listStylist)
 			</div>
 		</div>
         
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Stylist, htmlAttributes: new { @class = "control-label col-md-"})
-            <div class="col-md-10">
-                @Html.DropDownList("Stylist", string.Empty)
-                @Html.ValidationMessageFor(model => model.Stylist, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-        
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Service, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Service, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Service, "", new { @class = "text-danger" })
-            </div>*@
-        </div>
-		@*<div>
-			<div>
- <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Service)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th></th>
-    </tr>
+			<label class="control-label col-md-2" for="Date">Requested Date: </label>
+			<div class="col-md-10">
+				@Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd HH:mm}", new { @class = "form-control", type = "date" })
+			</div>
+		</div>
+        
+		<div>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Services)
+		</th>
+		<th>
+			Description
+		</th>
+		<th>
+			Min
+		</th>
+		<th>
+			Price
+		</th>
+		<th>
+			Stylist
+		</th>
+		<th>
+			Book
+		</th>
+	</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ScheduleId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ScheduleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ScheduleId })
-        </td>
-    </tr>
-}
+	@foreach (var item in Model.Services)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Name)
+				@Html.HiddenFor(modelItem => item.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Description)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Minutes)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Price)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Stylist.User.FName)
+			</td>
+			<td>
+				@Html.CheckBox("SelectedService", false)
+			</td>
+		</tr>
+	}
 
 </table>
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    </div>
 }
 
 <div>

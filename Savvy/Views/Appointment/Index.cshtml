@@ -1,10 +1,4 @@
-﻿@*@using Savvy.Models
-@model List<Appointment>
-
-@{
-    ViewBag.Title = "Appointment";
-}*@
-@model IEnumerable<Savvy.Models.Appointment>
+﻿@model IEnumerable<Savvy.Models.Appointment>
 
 @{
     ViewBag.Title = "Appointment";
@@ -43,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Stylist.User.FName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Stylist.Services.Name)
+                @Html.DisplayFor(modelItem => item.Service.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Service.Description)
@@ -60,17 +54,4 @@
     }
 
 </table>
-    @*<tr>
-        <th></th>
-    </tr>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AppointmentId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentId })
-        </td>
-    </tr>
-}
-
-</table>*@
+  
