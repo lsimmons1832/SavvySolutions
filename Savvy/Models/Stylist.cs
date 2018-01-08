@@ -15,5 +15,19 @@ namespace Savvy.Models
         public string State { get; set; }
         public int Zip { get; set; }
         public virtual ApplicationUser User { get; set; }
+
+        private List<Service> services;
+
+        public virtual List<Service> GetServices()
+        {
+            return services;
+        }
+
+        public virtual void SetServices(List<Service> value)
+        {
+            services = value;
+        }
+        //public virtual Schedule Schedules { get; set; }
+
     }
 }

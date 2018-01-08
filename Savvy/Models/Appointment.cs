@@ -12,5 +12,6 @@ namespace Savvy.Models
         public virtual Stylist Stylist { get; set; }
         public virtual Service Service { get; set; }
         public virtual Schedule Schedule { get; set; }
+        public DateTime Date { get; set; }
     }
 }

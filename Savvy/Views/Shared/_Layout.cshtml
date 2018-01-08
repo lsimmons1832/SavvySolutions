@@ -21,10 +21,28 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Appointments", "Index", "Appointment")</li>
-                    <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
-					<li>@Html.ActionLink("Services", "Index", "Service")</li>
-                    <li>@Html.ActionLink("Stylist", "Index", "Stylist")</li>
+                    @if (ViewContext.HttpContext.User.IsInRole("Stylist"))
+                    {
+                        <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("My Schedule", "Index", "Schedule")</li>
+                        <li>@Html.ActionLink("My Services", "Index", "Service")</li>
+					}
+					@if (ViewContext.HttpContext.User.IsInRole("Customer"))
+					{
+                        <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("Book Appointment", "Create", "Appointment")</li>
+                        <li>@Html.ActionLink("My Profile", "Details", "Customer")</li>
+                    @*<li>@Html.ActionLink("Services", "Index", "Service")</li>
+                    <li>@Html.ActionLink("Stylist", "Index", "Stylist")</li>*@
+                    }
+					@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+					{
+						<li>@Html.ActionLink("Appointment", "Index", "Appointment")</li>
+						<li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+						<li>@Html.ActionLink("Schedule", "Index", "Schedule")</li>
+						<li>@Html.ActionLink("Services", "Index", "Service")</li>
+						<li>@Html.ActionLink("Stylist", "Index", "Stylist")</li>
+					}
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
