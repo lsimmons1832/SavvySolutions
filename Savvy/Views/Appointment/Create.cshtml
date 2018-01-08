@@ -1,10 +1,8 @@
-﻿@model Savvy.ViewModels.Appointment.CreateApp
+﻿@model Savvy.ViewModels.Appointment.BookAppointment
 
 @{
-    ViewBag.Title = "Create";
+	ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,73 +10,48 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Appointment</h4>
+        <h4>BookAppointment</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		<div class="form-group">
-			<label class="control-label col-md-2" for="Stylists">Stylist: </label>
-			<div class="col-md-10">
-				@Html.DropDownList("listStylist", String.Empty)
-				@Html.ValidationMessageFor(model => model.listStylist)
-			</div>
-		</div>
-        
         <div class="form-group">
-			<label class="control-label col-md-2" for="Date">Requested Date: </label>
-			<div class="col-md-10">
-				@Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd HH:mm}", new { @class = "form-control", type = "date" })
-			</div>
-		</div>
-        
-		<div>
-<table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.Services)
-		</th>
-		<th>
-			Description
-		</th>
-		<th>
-			Min
-		</th>
-		<th>
-			Price
-		</th>
-		<th>
-			Stylist
-		</th>
-		<th>
-			Book
-		</th>
-	</tr>
+            @Html.LabelFor(model => model.StylistId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StylistId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StylistId, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-	@foreach (var item in Model.Services)
-	{
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.Name)
-				@Html.HiddenFor(modelItem => item.Name)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Description)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Minutes)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Price)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Stylist.User.FName)
-			</td>
-			<td>
-				@Html.CheckBox("SelectedService", false)
-			</td>
-		</tr>
-	}
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ServiceID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ServiceID, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-</table>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedService, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.SelectedService)
+                    @Html.ValidationMessageFor(model => model.SelectedService, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
@@ -87,6 +60,7 @@
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+    </div>
 }
 
 <div>

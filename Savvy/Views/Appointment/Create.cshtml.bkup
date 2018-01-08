@@ -1,0 +1,98 @@
+﻿@model Savvy.ViewModels.Appointment.CreateApp
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Appointment</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Stylists">Stylist: </label>
+			<div class="col-md-10">
+				@Html.DropDownList("listStylist", String.Empty)
+				@Html.ValidationMessageFor(model => model.listStylist)
+			</div>
+		</div>
+        
+        <div class="form-group">
+			<label class="control-label col-md-2" for="Date">Requested Date: </label>
+			<div class="col-md-10">
+				@Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd HH:mm}", new { @class = "form-control", type = "date" })
+			</div>
+		</div>
+        
+		<div>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Services)
+		</th>
+		<th>
+			Description
+		</th>
+		<th>
+			Min
+		</th>
+		<th>
+			Price
+		</th>
+		<th>
+			Stylist
+		</th>
+		<th>
+			Book
+		</th>
+	</tr>
+
+	@foreach (var item in Model.Services)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Name)
+				@Html.HiddenFor(modelItem => item.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Description)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Minutes)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Price)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Stylist.User.FName)
+			</td>
+			<td>
+				@Html.CheckBox("SelectedService", false)
+			</td>
+		</tr>
+	}
+
+</table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -314,6 +314,7 @@
     <Content Include="Views\Stylist\Edit.cshtml" />
     <Content Include="Views\Stylist\Index.cshtml" />
     <Content Include="Views\Appointment\Create.cshtml" />
+    <None Include="Views\Appointment\Create.cshtml.bkup" />
     <Content Include="Views\Appointment\Delete.cshtml" />
     <Content Include="Views\Appointment\Details.cshtml" />
     <Content Include="Views\Appointment\Edit.cshtml" />

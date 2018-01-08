@@ -38,5 +38,7 @@ namespace Savvy.Models
         public System.Data.Entity.DbSet<Savvy.Models.Schedule> Schedules {get; set;}
         public System.Data.Entity.DbSet<Savvy.Models.Service> Services {get; set;}
         public System.Data.Entity.DbSet<Savvy.Models.Stylist> Stylists {get; set;}
+
+        //public System.Data.Entity.DbSet<Savvy.ViewModels.Appointment.BookAppointment> BookAppointments { get; set; }
     }
 }

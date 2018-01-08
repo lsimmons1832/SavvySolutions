@@ -46,13 +46,16 @@ namespace Savvy.Controllers
 
         public ActionResult Create()
         {
-            var create = new CreateApp
-            {
-                listStylist = PopulateStylistsDropDownList(),
-                Services = SelectService(),
-            };
+            //var create = new CreateApp
+            //{
+            //    listStylist = PopulateStylistsDropDownList(),
+            //    Services = SelectService(),
+            //};
 
-            return View(create);
+            var stylist = PopulateStylistsDropDownList();
+            ViewBag.StylistId = stylist;
+
+            return View();
         }
 
         [HttpPost]
@@ -63,10 +66,10 @@ namespace Savvy.Controllers
             {
                 var appointment = new Appointment
                 {
-                    Stylist = db.Stylists.Find(bookAppointment.Stylist),
-                    Service = db.Services.Find(bookAppointment.Services),
+                    Stylist = db.Stylists.Find(bookAppointment.StylistId),
+                    Service = db.Services.Find(bookAppointment.ServiceID),
                     Date = bookAppointment.Date,
-                    Customer = db.Customers.Find(bookAppointment.Customer)
+                    Customer = db.Customers.Find(bookAppointment.CustomerId)
                 };
                 try
                 {

@@ -2,16 +2,19 @@
 using Savvy.Models;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Savvy.ViewModels.Appointment
 {
     public class BookAppointment
     {
+        [Key]
+        public int AppointmentId { get; set; }
         [DisplayName("Stylist")]
-        public int Stylist { get; set; }
-        public int Services { get; set; }
+        public int StylistId { get; set; }
+        public int ServiceID { get; set; }
         public DateTime Date { get; set; }
-        public int Customer { get; set; }
+        public int CustomerId { get; set; }
         [DisplayName("Book")]
         public bool SelectedService { get; set; }
         //public IEnumerable<Stylist> Stylists { get; set; }
