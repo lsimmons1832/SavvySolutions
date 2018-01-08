@@ -37,9 +37,9 @@ namespace Savvy.Migrations
                     LName = "Simmons"
                 };
 
-                var chkUser = userManager.Create(user, "password");
+                var chkUser = userManager.CreateAsync(user, "password");
 
-                if (chkUser.Succeeded)
+                if (chkUser.IsCompleted)
                 {
                     var result1 = userManager.AddToRole(user.Id, "Admin");
 

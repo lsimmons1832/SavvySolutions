@@ -228,6 +228,26 @@
     <Compile Include="Migrations\201712300139551_AddStylist.Designer.cs">
       <DependentUpon>201712300139551_AddStylist.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801051911141_ChangeModelForService.cs" />
+    <Compile Include="Migrations\201801051911141_ChangeModelForService.Designer.cs">
+      <DependentUpon>201801051911141_ChangeModelForService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060151463_changeAppointmentModel.cs" />
+    <Compile Include="Migrations\201801060151463_changeAppointmentModel.Designer.cs">
+      <DependentUpon>201801060151463_changeAppointmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060220540_changeAppointmentModel1.cs" />
+    <Compile Include="Migrations\201801060220540_changeAppointmentModel1.Designer.cs">
+      <DependentUpon>201801060220540_changeAppointmentModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801071729576_rollback.cs" />
+    <Compile Include="Migrations\201801071729576_rollback.Designer.cs">
+      <DependentUpon>201801071729576_rollback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801080021340_rollback1.cs" />
+    <Compile Include="Migrations\201801080021340_rollback1.Designer.cs">
+      <DependentUpon>201801080021340_rollback1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -249,6 +269,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\paisley.jpg" />
+    <Content Include="Content\css\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -367,6 +389,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712300139551_AddStylist.resx">
       <DependentUpon>201712300139551_AddStylist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051911141_ChangeModelForService.resx">
+      <DependentUpon>201801051911141_ChangeModelForService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060151463_changeAppointmentModel.resx">
+      <DependentUpon>201801060151463_changeAppointmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060220540_changeAppointmentModel1.resx">
+      <DependentUpon>201801060220540_changeAppointmentModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801071729576_rollback.resx">
+      <DependentUpon>201801071729576_rollback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801080021340_rollback1.resx">
+      <DependentUpon>201801080021340_rollback1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

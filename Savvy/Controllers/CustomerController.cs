@@ -19,6 +19,7 @@ namespace Savvy.Controllers
         // GET: Customer
         public ActionResult Index()
         {
+
             return View(db.Customers.ToList());
         }
 
@@ -85,6 +86,9 @@ namespace Savvy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CustomerID,Address1,Address2,City,State,Zip")] Customer customer)
         {
+            var currentUser = User.Identity.GetUserId();
+            customer.User = db.Users.Find(currentUser);
+
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;

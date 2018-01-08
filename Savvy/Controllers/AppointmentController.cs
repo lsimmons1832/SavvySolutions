@@ -53,7 +53,7 @@ namespace Savvy.Controllers
             //};
 
             var stylist = PopulateStylistsDropDownList();
-            ViewBag.StylistId = stylist;
+            ViewBag.Stylist = stylist;
 
             return View();
         }
@@ -62,8 +62,6 @@ namespace Savvy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BookAppointment bookAppointment)
         {
-            if (bookAppointment.SelectedService)
-            {
                 var appointment = new Appointment
                 {
                     Stylist = db.Stylists.Find(bookAppointment.StylistId),
@@ -86,7 +84,6 @@ namespace Savvy.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
                 PopulateStylistsDropDownList(appointment.Stylist);
-            }
                 return Create();
         }
 
